@@ -12,6 +12,8 @@ public class Papel {
         this.color = color;
         this.grosor = grosor;
     }
+    
+    
 }
     
     
