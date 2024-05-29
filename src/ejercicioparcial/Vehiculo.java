@@ -12,10 +12,8 @@ public class Vehiculo {
     
     
     public Vehiculo(String marca, double precio, int cilindraje) {
-        this.marca = marca;
         this.precio = precio;
         this.cilindraje = cilindraje;
-        this.marca = null;
         this.cuotaMesGaraje = CUOTAMESGARAJE;
         this.calcularImpuestoCirculacion();
     }

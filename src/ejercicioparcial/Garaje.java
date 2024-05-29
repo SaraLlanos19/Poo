@@ -4,6 +4,7 @@ public class Garaje implements IGaraje {
 
     
     Vehiculo[] espaciosGaraje;
+   
     
     @Override
     public double calcularIngresos() {
@@ -27,6 +28,7 @@ public class Garaje implements IGaraje {
         int cantidadResultados = 0;
         for (int i = 0; i < espaciosGaraje.length; i++) {
             Vehiculo vehiculo = espaciosGaraje[i];
+            
 
             if (vehiculo instanceof Moto && tipoVehiculo instanceof Moto) {
                 cantidadResultados++;
@@ -49,17 +51,34 @@ public class Garaje implements IGaraje {
                 return;
             }
         }
-        
-        System.out.println("es valido para insertar");
+        if(vehiculo instanceof Camioneta){
+            Camioneta camionetaRecorriendo = (Camioneta)vehiculo;
+            if(camionetaRecorriendo.tipo.equals("pickup")|| camionetaRecorriendo.tipo.equals("carga")){
+                int cantidadCamionetasEstacionadas = calcularCantidadCamionetaTipoCargaYOtro();
+                double espacioOcupado = (double)espaciosGaraje.length / (double) cantidadCamionetasEstacionadas;
+                if(espacioOcupado > 18){
+                    System.out.println("No se permite la entrada. Supera al 18% de espacios de camionetas");
+                    return;
+                    
+                    
+                }
+            }
+            
+            
+        }
+       System.out.println("es valido para insertar");
         for (int i = 0; i < espaciosGaraje.length; i++) {
             Vehiculo espacioRecorriendo = espaciosGaraje[i];
             if(espacioRecorriendo == null){
                 espaciosGaraje[i] = vehiculo;
                 return;
             }
-        }   
+        } 
         
     }
+    
+    //validar que si voy a estacionar una camioneta, no supere el 10% de espacios
+        
     public boolean esEntradaValida(Vehiculo moto){
         int cantMotosEstacionadas = this.calcularOcupacionPorTipoVehiculo(moto);
         double cantMaxima80Porciento = espaciosGaraje.length * 0.8;
@@ -68,6 +87,23 @@ public class Garaje implements IGaraje {
         System.out.println("cantMaxima80Porciento " + cantMaxima80Porciento);
         return cantMotosEstacionadas + 1 < Math.round(cantMaxima80Porciento);
     }
+    public int calcularCantidadCamionetaTipoCargaYOtro(){
+        int cantidadCamionetasTipoCarga = 0;
+        for(int i = 0; i < espaciosGaraje.length; i++) {
+            Vehiculo espacioRecorriendo = espaciosGaraje[i];
+            if(espacioRecorriendo instanceof Camioneta){
+                Camioneta camionetaRecorriendo = (Camioneta)espacioRecorriendo;
+                if(camionetaRecorriendo.tipo.equals("pickup")||camionetaRecorriendo.tipo.equals("carga")){
+                    cantidadCamionetasTipoCarga++;
+                    
+                }
+         }
+                
+    }
+        return cantidadCamionetasTipoCarga;
+
+    }
+    
     
     
     
@@ -81,6 +117,9 @@ public class Garaje implements IGaraje {
     public void setVehiculosParqueados(Vehiculo[] vehiculosParqueados) {
         this.espaciosGaraje = vehiculosParqueados;
     }
+
+    
+    
 
 
 
