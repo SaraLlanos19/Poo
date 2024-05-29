@@ -142,6 +142,7 @@ public class FabricadeTrajes implements IFabricadeTrajes{
             precio = precio + valorAdicional; //100 + 4 = 104
             
             Chaqueta chaqueta = new Chaqueta(id, nombre, talla, color, esComunitario, precio, numBotones);
+            //lista que sale de la base de datos
             gestorDeArchivos.guardarObjeto(chaqueta);
         }
         
@@ -367,11 +368,9 @@ public class FabricadeTrajes implements IFabricadeTrajes{
         Componente componente2 = this.encontrarComponentePorId(idChaquetaSeleccionada);
         Componente componente3 = this.encontrarComponentePorId(idFaldaPantalonSeleccionada);
         
-        //componentesEnAlmacen.remove(componente1);
+        
         gestorDeArchivos.eliminarObjeto(componente1);
-        //componentesEnAlmacen.remove(componente2);
         gestorDeArchivos.eliminarObjeto(componente2);
-        //componentesEnAlmacen.remove(componente3);
         gestorDeArchivos.eliminarObjeto(componente3);
         
      }
@@ -394,7 +393,7 @@ public class FabricadeTrajes implements IFabricadeTrajes{
                 componenteIterando.setPrecio(resultado);
             } 
            this.sonRebajas = false;
-        }else{//lista que sale de la base de datos
+        }else{
             for(Componente componenteIterando : gestorDeArchivos.obtenerTodosObjetos()){
                 double resultado = componenteIterando.getPrecio() / 2; //le rebaja la mitad del precio
                 componenteIterando.setPrecio(resultado);
