@@ -12,6 +12,7 @@ public class Menu {
     
     public static void main(String[] args) {
         int opcion = 1;
+        
         Scanner scanner = new Scanner(System.in);
         
         Utilidad u = new Utilidad();
