@@ -9,6 +9,7 @@ public class Papel {
         
     }
     public Papel(String color, int grosor) {
+        
         this.color = color;
         this.grosor = grosor;
     }
